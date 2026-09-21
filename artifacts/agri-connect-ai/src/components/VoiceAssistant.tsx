@@ -5,12 +5,16 @@ type SpeechResultEvent = {
   results: { [index: number]: { [index: number]: { transcript: string } } };
 };
 
+type SpeechErrorEvent = {
+  error?: string;
+};
+
 type SpeechRecognitionLike = {
   lang: string;
   interimResults: boolean;
   maxAlternatives: number;
   onresult: ((event: SpeechResultEvent) => void) | null;
-  onerror: (() => void) | null;
+  onerror: ((event: SpeechErrorEvent) => void) | null;
   onend: (() => void) | null;
   start: () => void;
   stop: () => void;
@@ -20,36 +24,65 @@ type SpeechRecognitionConstructor = new () => SpeechRecognitionLike;
 
 type VoiceCommand = {
   label: string;
-  path: string;
+  path?: string;
+  opensChat?: boolean;
 };
 
-function findVoiceCommand(spokenText: string): VoiceCommand | null {
-  const text = spokenText.toLowerCase().replace(/[?.!,]/g, '').trim();
-  const commands: { phrases: string[]; command: VoiceCommand }[] = [
-    { phrases: ['predict tomato price'], command: { label: 'AI Price Prediction for Tomato', path: '/farmer/prices?view=prediction&crop=Tomato' } },
-    { phrases: ['show price prediction'], command: { label: 'AI Price Prediction', path: '/farmer/prices?view=prediction' } },
-    { phrases: ['which crop has high demand'], command: { label: 'high-demand crops', path: '/farmer/demand?highlight=high' } },
-    { phrases: ['show ongoing orders'], command: { label: 'ongoing orders', path: '/farmer/orders?status=ongoing' } },
-    { phrases: ['show delivered orders'], command: { label: 'delivered orders', path: '/farmer/orders?status=delivered' } },
-    { phrases: ['show tomato price'], command: { label: 'Tomato price monitoring', path: '/farmer/prices?crop=Tomato' } },
-    { phrases: ['show price history'], command: { label: 'crop price history', path: '/farmer/prices?view=history' } },
-    { phrases: ['show pending payments'], command: { label: 'pending payments', path: '/farmer/payments?status=pending' } },
-    { phrases: ['show my payments'], command: { label: 'payments', path: '/farmer/payments' } },
-    { phrases: ['show crop demand'], command: { label: 'local crop demand', path: '/farmer/demand' } },
-    { phrases: ['show my orders'], command: { label: 'orders', path: '/farmer/orders' } },
-    { phrases: ['show my crops'], command: { label: 'My Crops', path: '/farmer/crops' } },
-    { phrases: ['sell crop'], command: { label: 'Sell Crop', path: '/farmer/sell' } },
-    { phrases: ['track my delivery'], command: { label: 'delivery tracking', path: '/farmer/delivery' } },
-    { phrases: ['show ratings'], command: { label: 'ratings', path: '/farmer/ratings' } },
-  ];
+const includesAny = (text: string, phrases: string[]) => phrases.some(phrase => text.includes(phrase));
 
-  return commands.find(({ phrases }) => phrases.some(phrase => text === phrase || text.includes(phrase)))?.command || null;
+function findVoiceCommand(spokenText: string): VoiceCommand | null {
+  const text = spokenText.toLowerCase().replace(/[?.!,]/g, '').replace(/\s+/g, ' ').trim();
+
+  if (includesAny(text, ['open ai assistant', 'open agribot', 'talk to ai', 'ask ai', 'agribot'])) {
+    return { label: 'AgriBot', opensChat: true };
+  }
+  if (includesAny(text, ['volunteer', 'assistance', 'i need help', 'request help', 'call volunteer', 'need help'])) {
+    return { label: 'volunteer help', path: '/farmer/help' };
+  }
+  if (includesAny(text, ['track delivery', 'track my delivery', 'delivery status', 'where is my delivery', 'track my order', 'delivery'])) {
+    return { label: 'delivery tracking', path: '/farmer/delivery' };
+  }
+  if (includesAny(text, ['rating', 'ratings', 'customer ratings', 'my ratings'])) {
+    return { label: 'ratings', path: '/farmer/ratings' };
+  }
+  if (includesAny(text, ['reward', 'rewards', 'reward points', 'my rewards'])) {
+    return { label: 'rewards', path: '/farmer/rewards' };
+  }
+  if (includesAny(text, ['pending payment', 'pending payments', 'show payments', 'my payments', 'payment', 'payments'])) {
+    return { label: text.includes('pending') ? 'pending payments' : 'payments', path: text.includes('pending') ? '/farmer/payments?status=pending' : '/farmer/payments' };
+  }
+  if (includesAny(text, ['predict crop price', 'price prediction', 'ai price prediction', 'predict tomato price', 'predict price'])) {
+    return { label: text.includes('tomato') ? 'AI Price Prediction for Tomato' : 'AI Price Prediction', path: text.includes('tomato') ? '/farmer/prices?view=prediction&crop=Tomato' : '/farmer/prices?view=prediction' };
+  }
+  if (includesAny(text, ['tomato history', 'tomato price'])) {
+    return { label: 'Tomato price monitoring', path: text.includes('history') ? '/farmer/prices?view=history&crop=Tomato' : '/farmer/prices?crop=Tomato' };
+  }
+  if (includesAny(text, ['show crop prices', 'market prices', 'show price history', 'price history', 'crop price', 'crop prices'])) {
+    return { label: 'crop price history', path: '/farmer/prices?view=history' };
+  }
+  if (includesAny(text, ['high demand', 'crop demand', 'local demand', 'demand'])) {
+    return { label: text.includes('high demand') || text.includes('which crop') ? 'high-demand crops' : 'local crop demand', path: text.includes('high demand') || text.includes('which crop') ? '/farmer/demand?highlight=high' : '/farmer/demand' };
+  }
+  if (includesAny(text, ['sell crop', 'list crop', 'add crop', 'sell my crop'])) {
+    return { label: 'Sell Crop', path: '/farmer/sell' };
+  }
+  if (includesAny(text, ['my crop listings', 'crop listings', 'open crops', 'check crops', 'show my crops', 'my crops', 'crops'])) {
+    return { label: 'My Crops', path: '/farmer/crops' };
+  }
+  if (includesAny(text, ['delivered orders', 'show delivered order', 'ongoing orders', 'ongoing order'])) {
+    return { label: text.includes('delivered') ? 'delivered orders' : 'ongoing orders', path: text.includes('delivered') ? '/farmer/orders?status=delivered' : '/farmer/orders?status=ongoing' };
+  }
+  if (includesAny(text, ['order', 'orders', 'open orders', 'check my orders', 'my orders'])) {
+    return { label: 'orders', path: '/farmer/orders' };
+  }
+
+  return null;
 }
 
-export function VoiceAssistant({ onNavigate }: { onNavigate: (path: string) => void }) {
+export function VoiceAssistant({ onNavigate, onOpenChat }: { onNavigate: (path: string) => void; onOpenChat: () => void }) {
   const [listening, setListening] = useState(false);
   const [heardText, setHeardText] = useState('');
-  const [status, setStatus] = useState('Tap the microphone and say a command.');
+  const [status, setStatus] = useState('Tap the microphone and speak.');
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   const stopListening = () => {
@@ -71,35 +104,57 @@ export function VoiceAssistant({ onNavigate }: { onNavigate: (path: string) => v
     const SpeechRecognition = speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      setStatus('Voice recognition is not supported in this browser.');
+      setStatus('Voice recognition is not supported in this browser. Please use the quick command buttons.');
       return;
     }
 
     const recognition = new SpeechRecognition();
+    let receivedResult = false;
     recognition.lang = 'en-IN';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
     recognition.onresult = event => {
+      receivedResult = true;
       const spoken = event.results[0][0].transcript.trim();
       setHeardText(spoken);
+      setStatus('Processing your request...');
       const command = findVoiceCommand(spoken);
-      if (command) {
-        setStatus(`Opening ${command.label}...`);
-        onNavigate(command.path);
+      window.setTimeout(() => {
+        if (command?.opensChat) {
+          setStatus('Opening AgriBot...');
+          onOpenChat();
+        } else if (command?.path) {
+          setStatus(`Opening ${command.label}...`);
+          onNavigate(command.path);
+        } else {
+          setStatus('I heard you, but I couldn’t match that command. Try saying “Show my orders”, “Show crop demand”, or “Track my delivery”.');
+        }
+      }, 350);
+    };
+    recognition.onerror = event => {
+      setListening(false);
+      if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+        setStatus('Microphone permission is required for voice commands. You can use the quick command buttons instead.');
+      } else if (event.error === 'no-speech') {
+        setStatus('No voice command detected. Please try again.');
       } else {
-        setStatus('I did not recognize that command. Try “Show my orders” or “Show tomato price”.');
+        setStatus('Sorry, I couldn’t understand the voice command. Please try again.');
       }
     };
-    recognition.onerror = () => {
+    recognition.onend = () => {
       setListening(false);
-      setStatus('I could not hear that. Tap the microphone and try again.');
+      if (!receivedResult) setStatus('No voice command detected. Please try again.');
     };
-    recognition.onend = () => setListening(false);
     recognitionRef.current = recognition;
     setHeardText('');
     setStatus('Listening...');
     setListening(true);
-    recognition.start();
+    try {
+      recognition.start();
+    } catch {
+      setListening(false);
+      setStatus('Sorry, I couldn’t start voice recognition. Please try again.');
+    }
   };
 
   return <section className="mb-5 rounded-2xl border border-[hsl(var(--primary)/.25)] bg-[hsl(var(--secondary))] p-5 shadow-sm sm:p-6" aria-label="Voice Assistant" data-testid="card-voice-assistant">
@@ -112,10 +167,10 @@ export function VoiceAssistant({ onNavigate }: { onNavigate: (path: string) => v
           <h2 className="font-display text-2xl">Voice Assistant</h2>
           <p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">Speak to access features quickly</p>
           <p className="mt-3 text-xs text-[hsl(var(--muted-foreground))]" role="status">{status}</p>
-          {heardText && <p className="mt-1 text-xs font-semibold text-[hsl(var(--primary))]">Heard: “{heardText}”</p>}
+          {heardText && <p className="mt-1 text-xs font-semibold text-[hsl(var(--primary))]">You said: “{heardText}”</p>}
         </div>
       </div>
-      <button type="button" onClick={startListening} className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold ${listening ? 'bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]' : 'bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]'}`} aria-label={listening ? 'Stop listening' : 'Start Voice Assistant'} data-testid="button-voice-assistant">
+      <button type="button" onClick={startListening} className="inline-flex items-center justify-center gap-2 rounded-xl bg-[hsl(var(--primary))] px-5 py-3 text-sm font-bold text-[hsl(var(--primary-foreground))]" aria-label={listening ? 'Stop listening' : 'Start Voice Assistant'} data-testid="button-voice-assistant">
         {listening ? <Square size={16} /> : <Mic size={16} />}
         {listening ? 'Listening...' : 'Voice Assistant'}
       </button>

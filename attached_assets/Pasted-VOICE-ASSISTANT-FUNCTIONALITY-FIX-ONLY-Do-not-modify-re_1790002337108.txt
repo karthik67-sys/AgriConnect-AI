@@ -1,0 +1,282 @@
+VOICE ASSISTANT FUNCTIONALITY FIX ONLY:
+
+Do not modify, remove, redesign, or replace anything else in the existing AgriConnect AI website.
+
+Only fix the existing Farmer Voice Assistant so that spoken commands actually perform actions.
+
+CURRENT PROBLEM:
+The microphone captures the farmer's voice, but after converting speech to text, nothing happens.
+
+REQUIRED BEHAVIOR:
+
+When the farmer clicks the microphone:
+
+1. Start browser Speech Recognition.
+2. Show “Listening...”
+3. Capture the farmer's spoken command.
+4. Convert speech to text.
+5. Display the recognized text.
+6. Process the recognized text.
+7. Match it against supported commands and keywords.
+8. Perform the corresponding action automatically.
+9. Navigate to the correct existing page or open the correct existing section.
+10. Show a short confirmation such as “Opening your orders...”
+
+The voice assistant must actually control the existing website.
+
+VOICE COMMAND PROCESSING:
+
+Do not depend only on exact sentences.
+
+Use flexible keyword and intent matching.
+
+For example:
+
+“show my orders”
+“open orders”
+“I want to see my orders”
+“check my orders”
+“my orders please”
+
+All should trigger the existing Farmer Orders page.
+
+Similarly:
+
+“show my crops”
+“open my crops”
+“check crops”
+“my crop listings”
+
+All should open My Crops.
+
+SUPPORTED FARMER ACTIONS:
+
+Orders:
+“show my orders”
+“open orders”
+“ongoing orders”
+“show delivered orders”
+
+→ Navigate to the existing Farmer Orders page.
+
+Crops:
+“show my crops”
+“open crops”
+“my crop listings”
+
+→ Navigate to the existing My Crops page.
+
+Selling:
+“sell crop”
+“list crop”
+“add crop”
+“sell my crop”
+
+→ Navigate to the existing Sell Crop page.
+
+Demand:
+“show crop demand”
+“which crop has high demand”
+“high demand crops”
+“show local demand”
+
+→ Navigate to the existing Local Crop Demand page.
+
+Prices:
+“show crop prices”
+“market prices”
+“show price history”
+“price history”
+
+→ Navigate to the existing Crop Price History page.
+
+Tomato:
+“show tomato price”
+“tomato price”
+“tomato history”
+
+→ Navigate to the existing Price Monitoring page and select Tomato if the existing page supports crop selection.
+
+Price prediction:
+“predict crop price”
+“price prediction”
+“AI price prediction”
+“predict tomato price”
+
+→ Navigate to the existing AI Price Prediction section/page.
+
+Payments:
+“show payments”
+“my payments”
+“show pending payments”
+“pending payments”
+
+→ Navigate to the existing Farmer Payments page.
+
+Delivery:
+“track delivery”
+“track my order”
+“delivery status”
+“where is my delivery”
+
+→ Navigate to the existing Farmer Delivery Tracking page.
+
+Ratings:
+“show ratings”
+“my ratings”
+“customer ratings”
+
+→ Navigate to the existing Farmer Ratings page.
+
+Rewards:
+“show rewards”
+“my rewards”
+“reward points”
+
+→ Navigate to the existing Farmer Rewards page.
+
+AI Assistant:
+“open AI assistant”
+“open Agribot”
+“talk to AI”
+“ask AI”
+
+→ Open the existing AgriBot.
+
+Volunteer Help:
+“I need help”
+“request volunteer”
+“call volunteer”
+“I need assistance”
+
+→ Open the existing Farmer Help / Volunteer Assistance feature.
+
+IMPORTANT COMMAND FLOW:
+
+After speech recognition returns text:
+
+recognizedText = transcript.toLowerCase().trim()
+
+Then process the text using intent/keyword matching.
+
+Example logic:
+
+If the text contains:
+“order”, “orders”, “ongoing order”, or “delivered order”
+→ open Orders.
+
+If it contains:
+“crop” and “my crops”
+→ open My Crops.
+
+If it contains:
+“sell”, “list crop”, or “add crop”
+→ open Sell Crop.
+
+If it contains:
+“demand” or “high demand”
+→ open Local Demand.
+
+If it contains:
+“price history”, “market price”, or “crop price”
+→ open Market Prices.
+
+If it contains:
+“predict price” or “price prediction”
+→ open AI Price Prediction.
+
+If it contains:
+“payment” or “pending payment”
+→ open Payments.
+
+If it contains:
+“delivery”, “track delivery”, or “track order”
+→ open Delivery Tracking.
+
+If it contains:
+“rating”
+→ open Ratings.
+
+If it contains:
+“reward”
+→ open Rewards.
+
+If it contains:
+“volunteer”, “help”, or “assistance”
+→ open Volunteer Help.
+
+Do not use exact-match-only logic.
+
+VOICE RECOGNITION STATES:
+
+Ready:
+“Tap the microphone and speak.”
+
+Listening:
+“Listening...”
+
+Processing:
+“Processing your request...”
+
+Recognized:
+“You said: Show my orders”
+
+Action:
+“Opening your orders...”
+
+Unknown command:
+“I heard you, but I couldn't match that command. Try saying ‘Show my orders’, ‘Show crop demand’, or ‘Track my delivery’.”
+
+ERROR HANDLING:
+
+If microphone permission is denied:
+“Microphone permission is required for voice commands. You can use the quick command buttons instead.”
+
+If Speech Recognition is unsupported:
+“Voice recognition is not supported in this browser. Please use the quick command buttons.”
+
+If no speech is detected:
+“No voice command detected. Please try again.”
+
+If recognition fails:
+“Sorry, I couldn't understand the voice command. Please try again.”
+
+IMPORTANT FUNCTIONAL REQUIREMENT:
+
+Do not stop after converting speech to text.
+
+The transcript MUST trigger an actual website action.
+
+The flow must be:
+
+Microphone
+→ Speech Recognition
+→ Transcript
+→ Intent Detection
+→ Action
+→ Existing Page/Section Opens
+
+Use the existing React Router navigation and existing state/functions wherever possible.
+
+If an existing page uses state such as selectedCrop, selectedLocation, or selectedSection, update that existing state instead of creating a duplicate page.
+
+Do not create duplicate dashboards or duplicate features.
+
+Keep the existing voice assistant UI unchanged unless a small status change is required to show Listening, Processing, or Recognized.
+
+Do not modify:
+Login
+Dashboards
+AgriBot design
+Chatbot responses
+Payments
+Crop demand UI
+Price prediction UI
+Delivery system
+Ratings
+Rewards
+Volunteer dashboard
+Navigation design
+Existing mock data
+
+ONLY FIX THE VOICE COMMAND PROCESSING SO THAT EVERY SUPPORTED SPOKEN COMMAND ACTUALLY PERFORMS THE CORRESPONDING EXISTING ACTION.
