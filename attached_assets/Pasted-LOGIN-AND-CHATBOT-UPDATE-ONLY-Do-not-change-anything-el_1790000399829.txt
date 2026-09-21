@@ -1,0 +1,255 @@
+LOGIN AND CHATBOT UPDATE ONLY:
+
+Do not change anything else in the existing AgriConnect AI project.
+
+Make ONLY these two changes:
+
+1. REMOVE DEMO LOGIN OPTIONS
+
+Completely remove the “Quick Demo Access” section from the login page.
+
+Remove all of these:
+- Demo Farmer
+- Demo Individual Consumer
+- Demo Bulk Consumer
+- Demo Delivery Person
+- Demo Volunteer
+- “Quick Demo Access” heading
+- Any text saying demo login/access opens dashboards directly
+
+The login page must contain only the normal login system.
+
+Normal login must require:
+
+Login as:
+Farmer
+Consumer
+Delivery Person
+Volunteer
+
+If Consumer is selected:
+Individual Consumer
+Bulk Consumer
+
+Fields:
+Email / Mobile Number
+Placeholder: “Enter your email or mobile number”
+
+Password
+Placeholder: “Enter your password”
+
+Add Show/Hide Password.
+
+Add:
+☐ Remember me
+
+Forgot Password?
+
+Button:
+“Login”
+
+The user must enter the login details before accessing the dashboard.
+
+Keep:
+“Don’t have an account? Create Account”
+
+Keep all existing signup and password-reset functionality if already present.
+
+Do not change the dashboard design or any other existing features.
+
+2. IMPROVE AGRIBOT CHATBOT RESPONSES
+
+Do not change the AgriBot design or position.
+
+Keep the existing AgriBot floating chat interface.
+
+Change the chatbot so it does NOT give the same response for every question.
+
+Create multiple realistic simulated conversation responses based on the user's question.
+
+The chatbot should identify keywords/intents and respond differently.
+
+FARMER CHAT EXAMPLES:
+
+User:
+“What is the tomato price?”
+
+AgriBot:
+“Based on the current demo market data, tomato is ₹30/kg in your selected locality. The recent trend is increasing. This is demo data, not live market information.”
+
+User:
+“Which crop has high demand?”
+
+AgriBot:
+“In your selected locality, tomato, chilli, and rice currently show high demo demand. Tomato has an estimated demand level of 87%.”
+
+User:
+“Predict tomato price.”
+
+AgriBot:
+“Based on the demo price trend, tomato is currently ₹30/kg and the predicted next-month price is ₹34/kg. Prediction confidence is 82%. This is a simulated AI prediction.”
+
+User:
+“Show my orders.”
+
+AgriBot:
+“You currently have 8 active orders and 42 delivered orders. Your next active order is #AG1024 for 800 kg of tomatoes. The order is currently in transit.”
+
+User:
+“Track my delivery.”
+
+AgriBot:
+“Order #AG1024 is currently in transit. The demo tracking route is Farm → Collection Center → Transport → Consumer. Estimated delivery is 8 Sept.”
+
+User:
+“Show my payments.”
+
+AgriBot:
+“Your demo payment summary shows ₹1,84,500 total earnings and ₹32,000 pending payments.”
+
+User:
+“I need help.”
+
+AgriBot:
+“I can help you with crop prices, demand prediction, orders, payments, delivery tracking, or volunteer assistance. Select one of the options below.”
+
+User:
+“I don't know how to use the website.”
+
+AgriBot:
+“No problem. You can request volunteer assistance. A volunteer can help you list crops, check prices, place orders, use payments, or track deliveries.”
+
+INDIVIDUAL CONSUMER CHAT EXAMPLES:
+
+User:
+“Show my orders.”
+
+AgriBot:
+“You have 2 active orders and 12 delivered orders. Your next delivery is currently out for delivery.”
+
+User:
+“How much did I save?”
+
+AgriBot:
+“Your current demo savings are ₹3,240. You also have approximately ₹450 in upcoming savings.”
+
+User:
+“Find cheap tomatoes.”
+
+AgriBot:
+“I found demo tomato offers starting at ₹29/kg. The example retail comparison is ₹35/kg, giving an estimated saving of ₹6/kg.”
+
+User:
+“Track my order.”
+
+AgriBot:
+“Your tomato order is currently out for delivery. The estimated delivery status will update as the delivery person progresses through the route.”
+
+User:
+“How can I pay?”
+
+AgriBot:
+“For Individual Consumers, the total order amount must be paid at checkout. Available demo payment methods are UPI, Card, and Digital Wallet.”
+
+BULK CONSUMER CHAT EXAMPLES:
+
+User:
+“Should I pay advance?”
+
+AgriBot:
+“For a bulk order, you can choose either 40% advance or full payment. For a ₹1,20,000 order, the 40% advance is ₹48,000 and the remaining balance is ₹72,000.”
+
+User:
+“Show my pending payments.”
+
+AgriBot:
+“You currently have bulk payment records with advance and balance amounts. Open Payments to view the complete order-wise breakdown.”
+
+User:
+“Find farmers.”
+
+AgriBot:
+“I can help you find verified farmers based on crop, location, quantity, quality, and price. Try asking for farmers with a specific crop and quantity.”
+
+DELIVERY PERSON CHAT EXAMPLES:
+
+User:
+“Show my deliveries.”
+
+AgriBot:
+“You have assigned deliveries available in your delivery dashboard. Open Active Delivery to view pickup location, destination, quantity, and delivery status.”
+
+User:
+“Where is my next delivery?”
+
+AgriBot:
+“Your next demo delivery can be viewed from the Active Delivery section. It includes the pickup point, destination, route, and estimated arrival.”
+
+VOLUNTEER CHAT EXAMPLES:
+
+User:
+“Show farmers needing help.”
+
+AgriBot:
+“There are farmer assistance requests waiting for support. You can open Help Requests to view their location, issue, phone number, and request time.”
+
+User:
+“How can I help a farmer?”
+
+AgriBot:
+“You can accept an assistance request and help the farmer with crop listing, price checking, ordering, payments, or delivery tracking.”
+
+QUICK CHAT BUTTONS:
+
+Keep the existing quick buttons, but make each one produce a different response.
+
+Track Order
+Payment Help
+Crop Price
+Find Buyer
+Request Volunteer
+Delivery Support
+
+Example:
+Track Order → asks which order or shows the user's active order status.
+Payment Help → explains the payment rules based on the current user role.
+Crop Price → provides the selected crop's demo price.
+Find Buyer → provides simulated buyer information.
+Request Volunteer → creates a simulated volunteer help request.
+Delivery Support → provides delivery status and tracking information.
+
+IMPORTANT CHATBOT BEHAVIOR:
+
+Do not return the same generic response for unrelated questions.
+
+Use keyword/intent matching for:
+price
+crop
+demand
+prediction
+order
+delivery
+payment
+buyer
+farmer
+savings
+volunteer
+help
+rating
+quality
+reward
+
+If the question is unknown, respond:
+“I can help with crop prices, demand, price prediction, orders, payments, delivery tracking, ratings, rewards, or volunteer support. Please ask me about one of these.”
+
+Allow the conversation to continue with multiple user messages and assistant responses.
+
+Maintain previous messages inside the chat window during the current session.
+
+Keep the existing microphone/voice assistant functionality.
+
+ONLY MAKE THESE TWO CHANGES:
+1. Remove all demo login options from the login interface.
+2. Make AgriBot provide different, context-based responses instead of repeating one response.
+
+Do not modify the existing dashboards, navigation, payment system, delivery system, AI prediction UI, crop demand UI, ratings, rewards, volunteer dashboard, or other project features.

@@ -30,17 +30,75 @@ export function AgriShell({ role, children }: { role: Role; children: React.Reac
     </aside>
     <div className="lg:pl-[254px]"><header className="sticky top-0 z-30 flex h-[72px] items-center justify-between border-b border-[hsl(var(--border))] bg-[hsl(var(--background)/.92)] px-4 backdrop-blur-xl sm:px-7"><div className="flex items-center gap-3"><button onClick={() => setOpen(true)} className="rounded-xl p-2 hover:bg-[hsl(var(--muted))] lg:hidden" data-testid="button-open-menu"><Menu size={20} /></button><div className="relative hidden w-64 sm:block"><Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[hsl(var(--muted-foreground))]" size={16} /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search your workspace" className="h-10 w-full rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] pl-9 pr-3 text-sm outline-none focus:border-[hsl(var(--primary))]" data-testid="input-global-search" /></div><span className="hidden rounded-full bg-[hsl(var(--accent)/.28)] px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-[hsl(var(--primary))] md:inline">Demo workspace</span></div><div className="flex items-center gap-1.5"><button onClick={() => showToast('You are all caught up')} className="relative rounded-xl p-2.5 hover:bg-[hsl(var(--muted))]" data-testid="button-notifications"><Bell size={19} /><span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-[hsl(var(--accent))]" /></button><button onClick={() => showToast('Settings panel is ready for this demo')} className="rounded-xl p-2.5 hover:bg-[hsl(var(--muted))]" data-testid="button-settings"><Settings size={19} /></button><div className="ml-1 hidden h-8 w-px bg-[hsl(var(--border))] sm:block" /><button onClick={() => showToast(`${info.name}'s profile selected`)} className="flex items-center gap-2 rounded-xl px-2 py-1.5 hover:bg-[hsl(var(--muted))]" data-testid="button-profile"><div className="grid h-8 w-8 place-items-center rounded-full bg-[hsl(var(--secondary))] font-mono text-[10px] font-bold text-[hsl(var(--primary))]">{info.initials}</div><ChevronDown size={15} className="hidden sm:block" /></button></div></header><main className="mx-auto max-w-[1480px] p-4 pb-28 sm:p-7 lg:p-9">{children}</main></div>
     <button onClick={() => setChat(true)} className="fixed bottom-5 right-5 z-30 flex items-center gap-2 rounded-full bg-[hsl(var(--primary))] px-4 py-3 text-sm font-bold text-[hsl(var(--primary-foreground))] shadow-lg hover:-translate-y-0.5" data-testid="button-open-agribot"><Bot size={18} /> <span className="hidden sm:inline">Ask AgriBot</span></button>
-    {chat && <Chat onClose={() => setChat(false)} onToast={showToast} />}
+     {chat && <Chat role={role} onClose={() => setChat(false)} onToast={showToast} />}
     <Toast message={toast} />
   </div>;
 }
 
-function Chat({ onClose, onToast }: { onClose: () => void; onToast: (s: string) => void }) {
+function getChatResponse(text: string, role: Role) {
+  const query = text.toLowerCase();
+  const isPrice = query.includes('price') || query.includes('cheap');
+  const isOrder = query.includes('order');
+  const isDelivery = query.includes('track') || query.includes('delivery') || query.includes('route');
+  const isPayment = query.includes('payment') || query.includes('pay');
+  const isHelp = query.includes('help') || query.includes("don't know") || query.includes('cannot') || query.includes("can't");
+  const isVolunteer = query.includes('volunteer') || query.includes('assistance');
+  const isBuyer = query.includes('buyer') || query.includes('farmer');
+
+  if (role === 'farmer') {
+    if (query.includes('predict')) return 'Based on the demo price trend, tomato is currently ₹30/kg and the predicted next-month price is ₹34/kg. Prediction confidence is 82%. This is a simulated AI prediction.';
+    if (isPrice) return 'Based on the current demo market data, tomato is ₹30/kg in your selected locality. The recent trend is increasing. This is demo data, not live market information.';
+    if (query.includes('demand')) return 'In your selected locality, tomato, chilli, and rice currently show high demo demand. Tomato has an estimated demand level of 87%.';
+    if (isOrder) return 'You currently have 8 active orders and 42 delivered orders. Your next active order is #AG1024 for 800 kg of tomatoes. The order is currently in transit.';
+    if (isDelivery) return 'Order #AG1024 is currently in transit. The demo tracking route is Farm → Collection Center → Transport → Consumer. Estimated delivery is 8 Sept.';
+    if (isPayment) return 'Your demo payment summary shows ₹1,84,500 total earnings and ₹32,000 pending payments.';
+    if (isVolunteer || isHelp) return 'No problem. You can request volunteer assistance. A volunteer can help you list crops, check prices, place orders, use payments, or track deliveries.';
+    if (isBuyer) return 'I found simulated buyer interest for tomato, chilli, and rice near Guntur. Open Find Buyers to compare quantity, target price, and delivery requirements.';
+  }
+
+  if (role === 'consumer') {
+    if (query.includes('save')) return 'Your current demo savings are ₹3,240. You also have approximately ₹450 in upcoming savings.';
+    if (query.includes('cheap') || query.includes('tomato')) return 'I found demo tomato offers starting at ₹29/kg. The example retail comparison is ₹35/kg, giving an estimated saving of ₹6/kg.';
+    if (isPayment) return 'For Individual Consumers, the total order amount must be paid at checkout. Available demo payment methods are UPI, Card, and Digital Wallet.';
+    if (isDelivery) return 'Your tomato order is currently out for delivery. The estimated delivery status will update as the delivery person progresses through the route.';
+    if (isOrder) return 'You have 2 active orders and 12 delivered orders. Your next delivery is currently out for delivery.';
+    if (isPrice) return 'The current demo tomato price is ₹30/kg, with direct-from-farm savings shown against the example retail price.';
+  }
+
+  if (role === 'bulk') {
+    if (query.includes('advance')) return 'For a bulk order, you can choose either 40% advance or full payment. For a ₹1,20,000 order, the 40% advance is ₹48,000 and the remaining balance is ₹72,000.';
+    if (query.includes('pending') && isPayment) return 'You currently have bulk payment records with advance and balance amounts. Open Payments to view the complete order-wise breakdown.';
+    if (isPayment) return 'Bulk buyers can choose 40% advance or full payment through UPI, Bank Transfer, or Digital Wallet. Payment status is simulated for this demo.';
+    if (isBuyer) return 'I can help you find verified farmers based on crop, location, quantity, quality, and price. Try asking for farmers with a specific crop and quantity.';
+    if (isDelivery) return 'Your bulk delivery route is Farm → Collection Center → Transport → Warehouse. Open Delivery to view the current mock status.';
+    if (isOrder) return 'Your active bulk orders are being matched with verified farmers. Open Bulk Orders to review quantities, target prices, and status.';
+    if (isPrice) return 'Bulk tomato pricing is simulated at ₹29/kg for the current requirement. Open Requirements to compare farmer offers.';
+  }
+
+  if (role === 'delivery') {
+    if (isOrder || query.includes('deliveries')) return 'You have assigned deliveries available in your delivery dashboard. Open Active Delivery to view pickup location, destination, quantity, and delivery status.';
+    if (isDelivery) return 'Your next demo delivery can be viewed from the Active Delivery section. It includes the pickup point, destination, route, and estimated arrival.';
+    if (isHelp) return 'Open the route board for pickup instructions, recipient contact, and the current delivery timeline.';
+  }
+
+  if (role === 'volunteer') {
+    if (query.includes('farmer') || query.includes('farmers')) return 'There are farmer assistance requests waiting for support. You can open Help Requests to view their location, issue, phone number, and request time.';
+    if (isHelp || query.includes('support')) return 'You can accept an assistance request and help the farmer with crop listing, price checking, ordering, payments, or delivery tracking.';
+    if (isOrder) return 'Open Help Requests to find farmers who need support with placing or tracking an order.';
+  }
+
+  if (query.includes('rating')) return 'Ratings help the network build trust. You can review product quality, communication, price, delivery, and overall experience.';
+  if (query.includes('quality')) return 'Quality records include grade, freshness, size, color, moisture, and verification status. All quality values in this prototype are simulated.';
+  if (query.includes('reward')) return 'Rewards are simulated points for useful actions such as listing crops, completing orders, rating partners, and repeat purchases.';
+  return 'I can help with crop prices, demand, price prediction, orders, payments, delivery tracking, ratings, rewards, or volunteer support. Please ask me about one of these.';
+}
+
+function Chat({ role, onClose, onToast }: { role: Role; onClose: () => void; onToast: (s: string) => void }) {
   const [messages, setMessages] = useState([{ from: 'bot', text: 'Hello. I can help with crop prices, buyers, payments, or delivery.' }]);
   const [input, setInput] = useState('');
   const [listening, setListening] = useState(false);
   const quick = ['Track Order', 'Payment Help', 'Crop Price', 'Find Buyer', 'Request Volunteer', 'Delivery Support'];
-  const send = (text = input) => { if (!text.trim()) return; setMessages(m => [...m, { from: 'you', text }, { from: 'bot', text: text.toLowerCase().includes('price') ? 'Tomato is trending at ₹30/kg in Guntur. This is a demo market prediction.' : 'I have noted that. A field coordinator can follow up in this demo.' }]); setInput(''); };
+  const send = (text = input) => { if (!text.trim()) return; setMessages(m => [...m, { from: 'you', text }, { from: 'bot', text: getChatResponse(text, role) }]); setInput(''); };
   const mic = () => { const Speech = (window as unknown as { webkitSpeechRecognition?: new () => { start: () => void; onresult: (e: { results: { 0: { 0: { transcript: string } } } }) => void; onend: () => void } }).webkitSpeechRecognition; if (Speech) { const recognition = new Speech(); recognition.onresult = e => setInput(e.results[0][0].transcript); recognition.onend = () => setListening(false); recognition.start(); setListening(true); } else { setListening(true); onToast('Microphone simulation active'); window.setTimeout(() => { setInput('Show tomato prices'); setListening(false); }, 900); } };
   return <div className="fixed bottom-20 right-4 z-50 flex w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-3xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] shadow-2xl fade-up" data-testid="panel-agribot"><div className="flex items-center justify-between bg-[hsl(var(--primary))] px-5 py-4 text-[hsl(var(--primary-foreground))]"><div className="flex items-center gap-3"><div className="grid h-9 w-9 place-items-center rounded-full bg-[hsl(var(--accent))] text-[hsl(var(--primary))]"><Bot size={18} /></div><div><p className="font-bold">AgriBot</p><p className="text-[11px] text-[hsl(var(--primary-foreground)/.65)]">Demo assistant • online</p></div></div><button onClick={onClose} data-testid="button-close-agribot"><X size={18} /></button></div><div className="max-h-72 space-y-3 overflow-auto p-4">{messages.map((m, i) => <div key={i} className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm ${m.from === 'you' ? 'ml-auto bg-[hsl(var(--accent)/.35)]' : 'bg-[hsl(var(--muted))]'}`} data-testid={`text-chat-${i}`}>{m.text}</div>)}</div><div className="flex flex-wrap gap-1.5 border-t border-[hsl(var(--border))] px-4 py-3">{quick.map(q => <button key={q} onClick={() => { send(q); if (q === 'Request Volunteer') onToast('Volunteer request drafted'); }} className="rounded-full border border-[hsl(var(--border))] px-2.5 py-1 text-[10px] font-semibold hover:border-[hsl(var(--primary))]" data-testid={`button-quick-${q.toLowerCase().replaceAll(' ', '-')}`}>{q}</button>)}</div><div className="flex items-center gap-2 border-t border-[hsl(var(--border))] p-3"><input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask a question..." className="min-w-0 flex-1 bg-transparent px-1 text-sm outline-none" data-testid="input-chat" /><button onClick={mic} className={`rounded-lg p-2 ${listening ? 'bg-[hsl(var(--accent))]' : ''}`} data-testid="button-chat-mic"><Mic size={17} /></button><button onClick={() => send()} className="rounded-lg bg-[hsl(var(--primary))] p-2 text-[hsl(var(--primary-foreground))]" data-testid="button-chat-send"><Send size={16} /></button></div></div>;
 }
