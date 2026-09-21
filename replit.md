@@ -1,6 +1,6 @@
-# [Project name]
+# AgriConnect AI
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+AgriConnect AI is a responsive frontend prototype connecting farmers, consumers, delivery partners, and volunteers with demo market intelligence and support workflows.
 
 ## Run & Operate
 
@@ -22,23 +22,31 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/agri-connect-ai/src/data/mockData.ts` — local demo data for users, crops, orders, prices, demand, and role navigation
+- `artifacts/agri-connect-ai/src/components/agri-components.tsx` — shared shell, charts, tracking, AI assistant, and dashboard primitives
+- `artifacts/agri-connect-ai/src/pages/Entry.tsx` — welcome and role-selection entry flow
+- `artifacts/agri-connect-ai/src/pages/RolePage.tsx` — role-aware page content and demo interactions
+- `artifacts/agri-connect-ai/src/index.css` — shared visual theme and responsive utility styles
+- `artifacts/agri-connect-ai/README.md` — app-specific setup, demo roles, features, and project structure
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The first release is frontend-only and uses local mock state so college demonstrations work without external services or API keys.
+- A shared role-aware shell keeps the five user journeys consistent while allowing each role to have its own navigation and accent treatment.
+- AI predictions, market values, delivery locations, trust scores, and payments are deliberately labeled or described as simulated demo data.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+The prototype includes demo login entry for five roles, farmer crop selling and market intelligence, individual and bulk buying flows, simulated payments, delivery tracking, quality verification, ratings, rewards, volunteer support, responsive charts, and AgriBot chat/voice assistance.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep the AgriConnect demo suitable for a college project presentation with no real payments or paid APIs.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The app's payment, prediction, market, route, and trust data are simulated; do not present them as live production values.
+- The root app is the deployable web artifact; the existing API and canvas artifacts are not required for the frontend demo.
 
 ## Pointers
 

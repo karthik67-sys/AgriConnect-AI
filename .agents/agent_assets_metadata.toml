@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "KNJ8NqXgSyzpWHQD86AqZ"
+uri = "file://AgriConnect-AI-prototype.zip"
+type = "unspecified"
+title = "AgriConnect AI prototype source"
+description = "Complete Vite React frontend source for the AgriConnect AI college demo, excluding node_modules and build output."
+logical_id = "f831767b-6c5d-4203-9069-8dd7a517bab9"
+content_hash = "sha256:e39997f39870dff72e1956f746c5cd2e01a5c86c0cdfbab43cbc52d3b4e10e5e"
+size = 160884
+mtime_ms = 1789998506215
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:7d97667a-0955-41a0-8fd1-84c093e7724a/f831767b-6c5d-4203-9069-8dd7a517bab9/fa0bca13-4d8d-4db1-a634-7a2c33f0da80"
+storage_version_token = "1789998514945193"
+content_type = "application/octet-stream"

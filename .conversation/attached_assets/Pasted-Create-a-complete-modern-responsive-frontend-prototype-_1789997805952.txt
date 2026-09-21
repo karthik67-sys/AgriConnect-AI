@@ -1,0 +1,1111 @@
+Create a complete, modern, responsive frontend prototype for my new project called “AgriConnect AI”.
+
+This is a college-level AgriTech solution based on the following problem statement:
+
+PROBLEM:
+Farmers and consumers face multiple intermediaries, lack of direct information, inefficient supply chains, unclear crop demand and pricing, logistics problems, quality verification issues, payment security concerns, delivery tracking problems, and limited customer support.
+
+MAIN GOAL:
+Connect farmers directly with consumers while using AI to improve crop demand prediction, price prediction, customer support, logistics, and decision-making.
+
+IMPORTANT:
+Build the complete working frontend prototype, not only a landing page.
+Use realistic mock/demo data.
+No backend is required.
+No real payment processing.
+No paid APIs.
+No API keys.
+Clearly label AI predictions and market values as demo/mock data.
+
+TECH STACK:
+React
+Vite
+TypeScript
+Tailwind CSS
+React Router
+Lucide React
+Recharts
+
+PROJECT NAME:
+AgriConnect AI
+
+TAGLINE:
+“From Your Farm to the Right Consumer”
+
+USER ROLES:
+1. Farmer
+2. Individual Consumer
+3. Bulk Consumer
+4. Delivery Person
+5. Volunteer
+
+LOGIN SYSTEM:
+
+Create a professional login page.
+
+Title:
+“Welcome to AgriConnect AI”
+
+Show role selection cards:
+
+Farmer
+Consumer
+Delivery Person
+Volunteer
+
+When Consumer is selected, show:
+Individual Consumer
+Bulk Consumer
+
+Fields:
+Mobile Number / Email
+Password
+
+Buttons:
+Login
+Demo Farmer
+Demo Individual Consumer
+Demo Bulk Consumer
+Demo Delivery Person
+Demo Volunteer
+
+Each demo button must open the correct dashboard.
+
+FARMER DASHBOARD:
+
+Create a professional dashboard focused on crop selling, demand, pricing, orders, payments, logistics, and AI assistance.
+
+Header:
+“Welcome back, Lakshya 👋”
+
+Location:
+“Guntur, Andhra Pradesh”
+
+Summary cards:
+Active Orders: 8
+Delivered Orders: 42
+Pending Orders: 3
+Total Earnings: ₹1,84,500
+Pending Payments: ₹32,000
+Available Crops: 4
+
+Create these major dashboard sections:
+
+1. Ongoing Orders
+2. Delivered Orders
+3. Crop Demand in Your Area
+4. AI Price Prediction
+5. Crop Price History
+6. My Crops
+7. Recent Payments
+8. Delivery Tracking
+9. Ratings
+10. Rewards
+11. AI Assistant
+
+ONGOING ORDERS:
+
+Each order must show:
+Order ID
+Crop
+Consumer/Buyer
+Consumer Type
+Quantity
+Price
+Total Amount
+Order Date
+Expected Delivery
+Payment Status
+Delivery Status
+
+Example:
+#AG1024
+Tomato
+FreshMart Foods
+Bulk Consumer
+800 kg
+₹30/kg
+₹24,000
+40% Advance Paid
+In Transit
+Expected: 8 Sept
+
+Buttons:
+View Order
+Track Delivery
+
+DELIVERED ORDERS:
+
+Show:
+Order ID
+Crop
+Consumer
+Quantity
+Total Amount
+Delivered Date
+Payment Status
+Rating
+
+Buttons:
+View Details
+Receipt
+Rate Consumer
+
+ORDER DETAILS:
+
+Create a detailed order page with a visual timeline:
+
+Order Received
+Order Confirmed
+Payment Received
+Crop Quality Verified
+Picked Up
+In Transit
+Delivered
+Payment Completed
+
+Show:
+Total Order Value
+Amount Paid
+Remaining Balance
+Payment Status
+Delivery Status
+
+MY CROPS:
+
+Crops:
+Tomato
+Rice
+Cotton
+Chilli
+Maize
+Groundnut
+
+Each crop card:
+Available Quantity
+Current Price
+Selling Price
+Active Orders
+Total Sold
+Remaining Quantity
+Quality Grade
+Demand Level
+Status
+
+Buttons:
+Sell Crop
+Edit Listing
+View Orders
+
+SELL CROP:
+
+Create a complete form:
+Crop Name
+Variety
+Quantity
+Unit
+Expected Price
+Minimum Price
+Harvest Date
+Quality Grade
+Farm Location
+Upload Images
+Description
+
+Grades:
+A
+B
+C
+
+Add:
+“Get AI Price Recommendation”
+
+Show:
+Current Demo Market Price
+Predicted Price
+Demand Level
+Price Trend
+Suggested Selling Price
+
+Button:
+“List Crop”
+
+AI CROP DEMAND PREDICTION:
+
+Create a major feature:
+“Crop Demand in Your Area”
+
+Default:
+Guntur, Andhra Pradesh
+
+Show:
+
+High Demand:
+Tomato
+Chilli
+Rice
+
+Medium Demand:
+Maize
+Cotton
+
+Low Demand:
+Groundnut
+
+Each crop card:
+Demand Level
+Demand Percentage
+Current Price
+Predicted Demand
+Available Supply
+Estimated Demand
+Price Change
+AI Recommendation
+
+Example:
+
+Tomato
+High Demand
+Demand: 87%
+Current Price: ₹30/kg
+Available Supply: 4,200 kg
+Estimated Demand: 7,800 kg
+Price Change: +8.4%
+
+AI Recommendation:
+“High demand detected. Farmers may consider listing available tomato stock.”
+
+Clearly label this as:
+“AI Demo Prediction”
+
+LOCATION SELECTOR:
+
+Allow users to select:
+
+Guntur
+Vijayawada
+Visakhapatnam
+Kurnool
+Tirupati
+Hyderabad
+Warangal
+
+When location changes, update the mock crop demand and price data.
+
+Create a dedicated:
+“Local Crop Demand” page.
+
+Filters:
+Location
+Crop
+Demand Level
+Price Trend
+
+Show ranked crops.
+
+PRICE PREDICTION:
+
+Create an AI feature:
+“AI Price Prediction”
+
+For each crop show:
+
+Current Price
+Predicted Price
+Price Change
+Prediction Period
+Confidence Level
+Trend
+
+Example:
+
+Tomato
+Current: ₹30/kg
+Predicted next month: ₹34/kg
+Change: +13.3%
+Trend: Increasing
+Confidence: 82%
+
+Clearly label all values as demo predictions.
+
+PRICE HISTORY:
+
+Create an interactive Recharts line chart:
+
+Title:
+“Crop Price History”
+
+Controls:
+Crop
+Location
+3 Months
+6 Months
+12 Months
+
+Demo Tomato:
+April ₹22/kg
+May ₹24/kg
+June ₹23/kg
+July ₹26/kg
+August ₹28/kg
+September ₹30/kg
+
+Demo Rice:
+April ₹58/kg
+May ₹59/kg
+June ₹60/kg
+July ₹61/kg
+August ₹62/kg
+September ₹64/kg
+
+Demo Chilli:
+April ₹105/kg
+May ₹110/kg
+June ₹108/kg
+July ₹115/kg
+August ₹120/kg
+September ₹125/kg
+
+Show:
+Current Price
+Previous Month Price
+Highest Price
+Lowest Price
+Average Price
+Percentage Change
+
+Trend:
+Increasing
+Decreasing
+Stable
+
+Add:
+“AI Insight”
+
+Example:
+“Demo data shows tomato prices increasing over the selected period.”
+
+QUALITY ASSESSMENT:
+
+Create a crop quality verification section.
+
+Show:
+Crop
+Farmer
+Quality Grade
+Freshness
+Size
+Color
+Moisture
+Verification Status
+
+Example:
+Tomato
+Grade A
+Freshness: 92%
+Quality Verified
+
+Add:
+“Request Quality Verification”
+
+Use simulated verification.
+
+FARMER VERIFICATION:
+
+Create verified farmer profiles.
+
+Show:
+Farmer Name
+Location
+Farm Size
+Crops
+Years Farming
+Verification Status
+Rating
+Completed Orders
+
+Badge:
+“Verified Farmer”
+
+INDIVIDUAL CONSUMER DASHBOARD:
+
+Make this visually different from the Farmer dashboard.
+
+Header:
+“Welcome back, Priya 👋”
+
+Subtitle:
+“Fresh produce directly from trusted farmers.”
+
+Cards:
+Active Orders
+Delivered Orders
+Total Saved
+Reward Points
+Upcoming Savings
+
+Sections:
+Ongoing Orders
+Order History
+Upcoming Savings
+Recommended Products
+Price Information
+Rewards
+AI Customer Care
+
+SHOP:
+
+Categories:
+Vegetables
+Fruits
+Rice
+Pulses
+Spices
+Organic
+
+Product cards:
+Product
+Farmer
+Location
+Price
+Market Price
+Savings
+Available Quantity
+Quality Grade
+Rating
+
+Buttons:
+Add to Cart
+Buy Now
+View Farmer
+
+INDIVIDUAL PAYMENT:
+
+Important rule:
+Individual Consumers must pay the TOTAL ORDER AMOUNT.
+
+Show:
+Product Price
+Quantity
+Delivery Fee
+Discount
+Final Amount
+
+Button:
+“Pay Full Amount”
+
+Payment methods:
+UPI
+Card
+Digital Wallet
+
+Example:
+Order: ₹850
+Discount: ₹50
+Delivery: ₹40
+Final Amount: ₹840
+
+Do not show 40% advance for Individual Consumers.
+
+After simulated payment:
+“Payment Successful”
+“Order Confirmed”
+
+BULK CONSUMER DASHBOARD:
+
+Show:
+Active Bulk Orders
+Completed Orders
+Pending Payments
+Advance Paid
+Total Purchase Value
+
+Sections:
+Bulk Procurement
+Find Farmers
+Crop Requirements
+Bulk Orders
+Payments
+Order History
+
+Example:
+Tomato
+Required: 2,000 kg
+Target Price: ₹29/kg
+
+BULK PAYMENT:
+
+Bulk Consumers can choose:
+
+“Pay 40% Advance”
+OR
+“Pay Full Amount”
+
+Example:
+Order Value: ₹1,20,000
+
+40% Advance:
+₹48,000 now
+₹72,000 remaining
+
+Full Payment:
+₹1,20,000 now
+
+If advance:
+40% Advance Paid
+60% Balance Pending
+
+If full:
+Fully Paid
+
+Methods:
+UPI
+Bank Transfer
+Digital Wallet
+
+Payment is simulated only.
+
+DELIVERY PERSON DASHBOARD:
+
+Create a separate delivery dashboard.
+
+Show:
+Assigned Deliveries
+Active Delivery
+Completed Deliveries
+Pending Pickups
+
+Each delivery:
+Order ID
+Crop
+Farmer
+Consumer
+Pickup Location
+Delivery Location
+Quantity
+Expected Delivery
+Status
+
+Buttons:
+Accept Delivery
+Start Pickup
+Start Delivery
+Update Location
+Mark Delivered
+
+Create delivery timeline:
+Assigned
+Picked Up
+In Transit
+Near Destination
+Delivered
+
+VOLUNTEER DASHBOARD:
+
+Create a volunteer support dashboard.
+
+Purpose:
+Help farmers who do not know how to use the digital platform.
+
+Show:
+Farmers Needing Help
+Pending Calls
+Completed Calls
+Active Assistance
+
+Each request:
+Farmer Name
+Location
+Problem
+Phone
+Request Time
+Status
+
+Buttons:
+Call Farmer
+Accept Request
+Mark Completed
+
+Example problems:
+Cannot list crop
+Cannot check price
+Cannot place order
+Cannot use payment
+Needs help tracking delivery
+
+Add:
+“Volunteer Help Request”
+
+FARMER ASSISTANCE:
+
+Create a visible option:
+“Need Help?”
+
+Farmers can request volunteer assistance.
+
+Show:
+Request Help
+Call Volunteer
+Chat with Volunteer
+
+This feature is especially designed for farmers with limited digital knowledge.
+
+AI VOICE ASSISTANT:
+
+Create a floating AI assistant called:
+“AgriBot”
+
+Add microphone button.
+
+Use browser Speech Recognition if available.
+If unavailable, simulate the interaction.
+
+Farmer commands:
+“What crop has high demand?”
+“What is tomato price?”
+“Predict tomato price.”
+“Show my orders.”
+“Track my delivery.”
+“Find buyers.”
+“Request volunteer help.”
+
+Individual Consumer:
+“Show my orders.”
+“How much did I save?”
+“Find cheap tomatoes.”
+“Track my order.”
+
+Bulk Consumer:
+“Find farmers.”
+“Show bulk prices.”
+“Show pending payments.”
+“Track my bulk order.”
+
+Delivery Person:
+“Show my deliveries.”
+“Where is my next delivery?”
+
+Volunteer:
+“Show farmers needing help.”
+
+AI CHATBOT CUSTOMER CARE:
+
+Create a dedicated AI chatbot page and floating chat widget.
+
+Title:
+“AgriConnect AI Customer Care”
+
+Features:
+Order help
+Payment help
+Delivery help
+Crop information
+Price information
+Account help
+Volunteer assistance
+
+Quick buttons:
+Track Order
+Payment Help
+Crop Price
+Find Buyer
+Request Volunteer
+Delivery Support
+
+Use simulated responses.
+
+RATINGS:
+
+Create a rating system.
+
+Farmer can rate consumers.
+Consumers can rate farmers.
+Bulk consumers can rate farmers.
+Farmers can rate delivery persons.
+Consumers can rate delivery persons.
+
+5-star rating.
+
+Categories:
+Product Quality
+Communication
+Price
+Delivery
+Overall Experience
+
+Show:
+Average Rating
+Rating History
+Recent Reviews
+
+PAYMENTS:
+
+Create a payment dashboard for each applicable role.
+
+Farmer:
+Total Earnings
+Received Payments
+Pending Payments
+Advance Payments
+Completed Payments
+
+Individual Consumer:
+Total Spent
+Current Orders
+Completed Orders
+Savings
+
+Bulk Consumer:
+Total Purchase Value
+Advance Paid
+Balance Pending
+Fully Paid Orders
+
+Use simulated digital payments only.
+
+DELIVERY TRACKING:
+
+Create tracking for all users.
+
+Farmer:
+Farm → Collection Center → Transport → Consumer
+
+Individual Consumer:
+Farmer → Delivery Partner → Consumer
+
+Bulk Consumer:
+Farm → Collection Center → Transport → Warehouse
+
+Delivery Person:
+Pickup → Route → Destination
+
+Create a map-style frontend visualization without a paid map API.
+
+Show:
+Current Location
+Distance
+Estimated Arrival
+Last Updated
+Delivery Status
+
+Use mock locations.
+
+LOGISTICS SUPPORT:
+
+Create:
+Route Optimization
+Delivery Assignment
+Cold Chain Support
+Storage Support
+
+For crop deliveries requiring cold storage, show:
+Storage Required
+Temperature Range
+Storage Location
+Estimated Storage Time
+
+Use mock data.
+
+CUSTOMER CARE:
+
+Provide:
+AI Chatbot
+AI Voice Assistant
+Volunteer Help
+FAQ
+Contact Support
+
+NOTIFICATIONS:
+
+Farmer:
+New Order
+Price Prediction Update
+Demand Alert
+Payment Received
+Delivery Update
+New Rating
+Volunteer Response
+
+Individual Consumer:
+Order Confirmed
+Out for Delivery
+Delivered
+New Offer
+Savings Alert
+
+Bulk Consumer:
+Farmer Accepted Offer
+Advance Payment Reminder
+Order Dispatched
+Delivery Update
+Payment Update
+
+Delivery Person:
+New Assignment
+Pickup Reminder
+Route Update
+
+Volunteer:
+New Farmer Assistance Request
+
+REWARDS:
+
+Farmer:
+List Crop +50
+Complete Order +100
+On-Time Delivery +75
+5-Star Rating +25
+Bulk Order +150
+
+Individual Consumer:
+Order +50
+Repeat Purchase +75
+Rating +25
+Referral +100
+
+Show:
+Points
+Level
+Progress
+Badges
+Reward History
+
+NAVIGATION:
+
+Farmer:
+Dashboard
+My Crops
+Sell Crops
+Demand Prediction
+Price Prediction
+Market Prices
+Orders
+Payments
+Delivery Tracking
+Quality Verification
+Ratings
+Rewards
+AI Assistant
+Volunteer Help
+Profile
+Settings
+
+Individual Consumer:
+Dashboard
+Shop
+Orders
+Order History
+Savings
+Delivery Tracking
+Ratings
+Rewards
+AI Customer Care
+Profile
+Settings
+
+Bulk Consumer:
+Dashboard
+Find Farmers
+Requirements
+Bulk Orders
+Order History
+Payments
+Delivery Tracking
+Ratings
+AI Customer Care
+Profile
+Settings
+
+Delivery Person:
+Dashboard
+Assigned Deliveries
+Active Delivery
+Route
+History
+Profile
+
+Volunteer:
+Dashboard
+Help Requests
+Farmers
+Calls
+History
+Profile
+
+ROUTES:
+
+/
+/login
+/farmer/dashboard
+/farmer/crops
+/farmer/sell
+/farmer/demand
+/farmer/prices
+/farmer/orders
+/farmer/payments
+/farmer/delivery
+/farmer/quality
+/farmer/ratings
+/farmer/rewards
+/farmer/assistant
+/farmer/help
+/consumer/dashboard
+/consumer/shop
+/consumer/orders
+/consumer/history
+/consumer/savings
+/consumer/delivery
+/consumer/ratings
+/consumer/rewards
+/consumer/assistant
+/bulk/dashboard
+/bulk/farmers
+/bulk/requirements
+/bulk/orders
+/bulk/history
+/bulk/payments
+/bulk/delivery
+/bulk/ratings
+/delivery/dashboard
+/delivery/active
+/delivery/history
+/volunteer/dashboard
+/volunteer/requests
+/volunteer/history
+
+DESIGN:
+
+Create a professional AgriTech SaaS interface.
+
+Primary color:
+Green
+
+Supporting colors:
+White
+Dark Green
+Light Green
+Yellow
+Orange
+Red only for warnings
+
+Use:
+Rounded cards
+Clean typography
+Soft shadows
+Professional icons
+Responsive charts
+Clear status badges
+Modern dashboard layout
+Subtle animations
+
+Make each role visually distinct while keeping the same brand identity.
+
+RESPONSIVE:
+
+Desktop:
+1280px and 1440px
+
+Tablet:
+768px
+
+Mobile:
+375px and 430px
+
+No horizontal overflow.
+
+Use mobile navigation and responsive cards.
+
+TECHNICAL:
+
+Create reusable components:
+Sidebar
+Navbar
+MobileNav
+StatCard
+CropCard
+OrderCard
+OrderTimeline
+PriceChart
+DemandChart
+PredictionCard
+PaymentCard
+DeliveryTracker
+RatingStars
+AIChat
+VoiceAssistant
+VolunteerHelp
+QualityCard
+NotificationPanel
+LocationTracker
+Modal
+Toast
+
+Keep mock data separate:
+farmers
+consumers
+bulkConsumers
+deliveryPersons
+volunteers
+crops
+orders
+payments
+priceHistory
+demandData
+predictions
+ratings
+notifications
+deliveryData
+qualityData
+
+FINAL TEST:
+
+Run the project.
+Fix all TypeScript errors.
+Run npm run build.
+Fix all build errors.
+Test all five login roles.
+Test Individual Consumer and Bulk Consumer selection.
+Test Farmer dashboard.
+Test ongoing and delivered orders.
+Test full individual payment.
+Test bulk 40% advance and full payment.
+Test crop demand prediction.
+Test price prediction.
+Test price history charts.
+Test location switching.
+Test AI chatbot.
+Test voice assistant.
+Test volunteer assistance.
+Test delivery person dashboard.
+Test delivery tracking.
+Test ratings.
+Test quality verification.
+Test notifications.
+Test responsive mobile layout.
+
+PROJECT DOWNLOAD:
+
+Create a normal Vite React project.
+
+It must run with:
+
+npm install
+npm run dev
+
+It must build with:
+
+npm run build
+
+Create README.md containing:
+Installation
+How to run
+Demo login roles
+Features
+Project structure
+How to create production build
+
+Finally create a ZIP containing the complete source code.
+
+Do NOT include node_modules.
+
+The final AgriConnect AI prototype must be complete, professional, responsive, functional, and suitable for a college project demonstration.

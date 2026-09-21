@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AgriConnect AI"
+description = "A responsive AgriTech marketplace prototype connecting farmers, consumers, delivery partners, and volunteers with demo demand insights, price predictions, logistics tracking, and AI assistance."
+version = "1.0.0"
+id = "artifacts/agri-connect-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24433
+
+[services.development]
+run = "pnpm --filter @workspace/agri-connect-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/agri-connect-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/agri-connect-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24433"
+BASE_PATH = "/"
